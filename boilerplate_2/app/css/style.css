@@ -1,0 +1,15 @@
+/* Constants */
+/* Default Override */
+html,
+body {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0px;
+  margin: 0px;
+  background-color: #FAFAFA;
+  color: #424242;
+  font-family: 'Open Sans', sans-serif;
+  overflow: visible;
+  visibility: visible; }
