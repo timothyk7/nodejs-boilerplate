@@ -4,7 +4,6 @@
   "description": "Boilerplate for NodeJS and Express",
   "main": "server.js",
   "scripts": {
-    "test": "jasmine",
     "start": "node server.js"
   },
   "repository": {
