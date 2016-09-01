@@ -110,6 +110,7 @@ gulp.task('clean:logs', function() {
 gulp.task('watch', function() {
     gulp.watch('app/views/**/*.html', browserSync.reload);
     gulp.watch('app/js/**/*.js', ['scripts', browserSync.reload]);
+    gulp.watch('app/libs/**/*.js', ['libs', browserSync.reload]);
     gulp.watch('app/scss/**/*.scss', ['css', browserSync.reload]);
     gulp.watch('app/images/**/*.+(png|jpg|jpeg|gif|svg)', ['images', browserSync.reload]);
     gulp.watch('app/fonts/**/*', ['fonts', browserSync.reload]);
@@ -129,7 +130,7 @@ gulp.task('nodemon', function (cb) {
     
     return nodemon({
         script: 'server.js',
-        watch: ['app/routes/**/*']
+        watch: ['app/routes/**/*', 'server.js']
     }).on('start', function () {
         if (!started) {
             cb();
@@ -170,20 +171,45 @@ gulp.task('mongoend', function() {
 /*** Build ***/
 gulp.task('default', function(cb) {
     runSequence(
-        'build',
+        'build:debug',
+        'debug:js',
         'mongostart',
         ['browser-sync', 'watch'],
         cb
-    )
+    );
+});
+
+gulp.task('prod', function(cb) {
+    runSequence(
+        'build:prod',
+        'mongostart',
+        ['browser-sync', 'watch'],
+        cb
+    );
 });
 
 gulp.task('build', function(cb) {
     runSequence(
-        'clean:build',
         'lint',
         'test',
-        ['css', 'scripts', 'libs', 'images', 'fonts'],
+        ['css', 'scripts', 'libs', 'images'],
         cb
-    )
+    );
+});
+
+gulp.task('build:debug', function(cb) {
+    runSequence(
+        'clean:build',
+        'build',
+        cb
+    );
+});
+
+gulp.task('build:prod', function(cb) {
+    runSequence(
+        'clean',
+        'build',
+        cb
+    );
 });
 

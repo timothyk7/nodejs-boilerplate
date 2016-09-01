@@ -6,6 +6,7 @@ Uses NodeJS and Express as base with MongoDB as backend.  Included gulp to make 
 - check if js is valid
 - auto refreshing browser when client or server side code is changed
 - concurrent browser testing (browser-sync)
+- building for debug and production
 
 
 Prerequisites:
